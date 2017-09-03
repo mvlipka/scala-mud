@@ -4,11 +4,11 @@ object Commander {
 
   var commands: Map[String, (String, String) => Unit] = Map()
 
-  def registerMethod(command: String, f: (String, String) => Unit) = {
+  def registerMethod(command: String, f: (String, String) => Unit): Unit = {
     commands += (command -> f)
   }
 
-  def run(command: String) = {
+  def run(command: String): Unit = {
     val parsedInput: Array[String] = parse(command)
 
     val verb = parsedInput(0)
@@ -25,8 +25,6 @@ object Commander {
   }
 
   def parse(command: String): Array[String] = {
-    val words = command.toLowerCase.split(" ")
-
-    return words
+    command.toLowerCase.split(" ")
   }
 }

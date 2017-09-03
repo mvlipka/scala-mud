@@ -3,7 +3,7 @@ package game
 object World {
   var currentRoom: Room = _
 
-  def init() = {
+  def init(): Unit = {
 
     currentRoom = new Room()
     Commander.registerMethod("go", (direction: String, _) => {
@@ -17,35 +17,35 @@ object World {
     })
   }
 
-  def goNorth() = {
+  def goNorth(): Unit = {
     currentRoom.northRoom match {
       case None => println("There is nowhere to go north")
       case _ => currentRoom = currentRoom.northRoom.get
     }
   }
 
-  def goSouth() = {
+  def goSouth(): Unit = {
     currentRoom.southRoom match {
       case None => println("There is nowhere to go south")
       case _ => currentRoom = currentRoom.southRoom.get
     }
   }
 
-  def goEast() = {
+  def goEast(): Unit = {
     currentRoom.eastRoom match {
       case None => println("There is nowhere to go east")
       case _ => currentRoom = currentRoom.eastRoom.get
     }
   }
 
-  def goWest() = {
+  def goWest(): Unit = {
     currentRoom.westRoom match {
       case None => println("There is nowhere to go west")
       case _ => currentRoom = currentRoom.westRoom.get
     }
   }
 
-  def step() = {
+  def step(): Unit = {
     currentRoom.step()
   }
 }
