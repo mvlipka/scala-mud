@@ -12,7 +12,7 @@ object World {
         case "south" => goSouth()
         case "east" => goEast()
         case "west" => goWest()
-        case _ => println("Command not recognized")
+        case _ => println(s"Direction $direction not recognized")
       }
     })
   }
@@ -20,28 +20,48 @@ object World {
   def goNorth(): Unit = {
     currentRoom.northRoom match {
       case None => println("There is nowhere to go north")
-      case _ => currentRoom = currentRoom.northRoom.get
+      case _ => {
+        currentRoom.cleanup()
+        currentRoom = currentRoom.northRoom.get
+        currentRoom.init()
+        currentRoom
+      }
     }
   }
 
   def goSouth(): Unit = {
     currentRoom.southRoom match {
       case None => println("There is nowhere to go south")
-      case _ => currentRoom = currentRoom.southRoom.get
+      case _ => {
+        currentRoom.cleanup()
+        currentRoom = currentRoom.southRoom.get
+        currentRoom.init()
+        currentRoom
+      }
     }
   }
 
   def goEast(): Unit = {
     currentRoom.eastRoom match {
       case None => println("There is nowhere to go east")
-      case _ => currentRoom = currentRoom.eastRoom.get
+      case _ => currentRoom = {
+        currentRoom.cleanup()
+        currentRoom = currentRoom.eastRoom.get
+        currentRoom.init()
+        currentRoom
+      }
     }
   }
 
   def goWest(): Unit = {
     currentRoom.westRoom match {
       case None => println("There is nowhere to go west")
-      case _ => currentRoom = currentRoom.westRoom.get
+      case _ => currentRoom = {
+        currentRoom.cleanup()
+        currentRoom = currentRoom.westRoom.get
+        currentRoom.init()
+        currentRoom
+      }
     }
   }
 

@@ -8,6 +8,10 @@ object Commander {
     commands += (command -> f)
   }
 
+  def cleanMethod(command: String): Unit = {
+    commands -= command
+  }
+
   def run(command: String): Unit = {
     val parsedInput: Array[String] = parse(command)
 
@@ -19,6 +23,11 @@ object Commander {
       case 2 => actor = parsedInput(1)
       case 3 => actor = parsedInput(1); other = parsedInput(2)
       case _ => ()
+    }
+
+    if (!commands.contains(verb)) {
+      println(s"Command ${verb} not found")
+      return
     }
 
     commands(verb)(actor, other)
